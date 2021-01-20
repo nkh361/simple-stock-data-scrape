@@ -1,9 +1,13 @@
 from bs4 import BeautifulSoup
 import urllib3
 import webbrowser
+import csv
+from datetime import date, datetime
+import pandas
+
+symbol = input("Enter a NYSE symbol: ")
 
 def get_Symbol_Link():
-	symbol = input("Enter a NYSE symbol: ")
 	url = "https://www.marketwatch.com/investing/stock/" + symbol + "/analystestimates"
 	urlNew = url.replace('symbol', symbol)
 	return urlNew
@@ -18,7 +22,7 @@ def get_Current_Stats():
 
 	for price in currentPrice:
 		current = price.string
-		print("Current price: $", current)
+		# print("Current price: $", current)
 
 	tableElements=[]
 
@@ -26,13 +30,29 @@ def get_Current_Stats():
 		target = tp.string
 		tableElements.append(target)
 
-	if len(tableElements) <= 0:
-		print("No target price data available")
-	else:		
-		print('Average target price: $', tableElements[1])
+	today = date.today()
+	time = datetime.now()
+	time = time.strftime("%H:%M:%S")
 
+	if len(tableElements) <= 0:
+		tableElements = 'None'
+	# else:		
+	# 	print('Average target price: $', tableElements[1])
+
+	return today, time, symbol, current, tableElements[1]
+
+def csv_it():
+	with open('stock-info.csv', 'a') as csv_file:
+		fileWriter = csv.writer(csv_file)
+		# fileWriter.writerow(['Date', 'Time', 'Symbol', 'Current', 'Target Price']) need to find way to prevent repeat
+		fileWriter.writerow(get_Current_Stats())
+
+def read_csv():
+	# panda dataframes are soooo ez to read lol
+	df = pandas.read_csv('stock-info.csv')
+	print(df)
 
 def main():
-	get_Current_Stats()
-
+	csv_it()
+	read_csv()
 main()
