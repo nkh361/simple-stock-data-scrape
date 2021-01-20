@@ -9,8 +9,12 @@
   
 <br>
 <br>
-  
+<h2>
+  How to use
+</h2>
 <p>
-  Alright, so lets talk business. On line 47 of the python file, you will find that the code is commented out, this is because my lazy self hasn't set an 'if' statement yet to stop putting the line in if there is already a previous entry.
+  1.) run it <br>
+  2.) plug in ticker symbol <br>
+  3.) drown in data <br>
 </p>
 </body>
