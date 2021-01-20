@@ -1,9 +1,7 @@
 from bs4 import BeautifulSoup
-import urllib3
-import webbrowser
-import csv
+import urllib3, webbrowser, csv, pandas, os.path
 from datetime import date, datetime
-import pandas
+from os import path
 
 symbol = input("Enter a NYSE symbol: ")
 
@@ -42,10 +40,15 @@ def get_Current_Stats():
 	return today, time, symbol, current, tableElements[1]
 
 def csv_it():
-	with open('stock-info.csv', 'a') as csv_file:
-		fileWriter = csv.writer(csv_file)
-		# fileWriter.writerow(['Date', 'Time', 'Symbol', 'Current', 'Target Price']) need to find way to prevent repeat
-		fileWriter.writerow(get_Current_Stats())
+	if path.exists('stock-info.csv') == True: # this is to prevent repeated column-naming
+		with open('stock-info.csv', 'a') as csv_file:
+			fileWriter = csv.writer(csv_file)
+			fileWriter.writerow(get_Current_Stats())
+	else:
+		with open('stock-info.csv', 'a') as csv_file:
+			fileWriter = csv.writer(csv_file)
+			fileWriter.writerow(['Date', 'Time', 'Symbol', 'Current', 'Target Price'])
+			fileWriter.writerow(get_Current_Stats())
 
 def read_csv():
 	# panda dataframes are soooo ez to read lol
