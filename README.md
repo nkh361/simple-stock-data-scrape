@@ -7,6 +7,11 @@
 <body>
   The purpose of this is to make a simple command line tool to look up symbol prices along with their target prices. At the current stage, it only does provide those two elements. Hopefully, in the future I can turn this useless piece of garbage into an advanced, 2022 intern-overegineered-making-weird-databases-for-no-reason piece of garbage. Lets see where this goes.
   
+  -----------------------
+  UPDATE 2-12-21
+  -----------------------
+  iss broken
+  
 <br>
 <br>
 <h2>
